@@ -78,6 +78,25 @@ RSpec.describe SlackBuilder::Elements::InteractiveElements::Button do
       it { is_expected.to eq(expected_attributes) }
     end
 
+    context 'with a value' do
+      let(:element) { described_class.new('Hello', value: '<VALUE>') }
+
+      let(:expected_attributes) do
+        {
+          type: 'button',
+          text: {
+            type: 'plain_text',
+            text: 'Hello',
+            emoji: true,
+          },
+          value: '<VALUE>',
+        }
+      end
+
+      it { is_expected.to eq(expected_attributes) }
+    end
+
+
     context 'with an accessibility_label' do
       let(:element) { described_class.new('Hello', url: 'https://example.com', accessibility_label: 'Hello world') }
 

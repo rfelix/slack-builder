@@ -9,11 +9,12 @@ module SlackBuilder
       class Button < Base::Element
         TYPE = 'button'
 
-        def initialize(text, url: nil, style: nil, emoji: true, action_id: nil, accessibility_label: nil, **kwargs)
+        def initialize(text, url: nil, style: nil, emoji: true, action_id: nil, value: nil, accessibility_label: nil, **kwargs)
           @text = TextElements::PlainText.new(text, emoji: emoji)
           @url = url unless url.nil?
           @style = style.to_s unless style.nil?
           @action_id = action_id unless action_id.nil?
+          @value = value unless value.nil?
           @accessibility_label = accessibility_label unless accessibility_label.nil?
           super(**kwargs)
         end
@@ -23,6 +24,7 @@ module SlackBuilder
             h[:url] = @url if defined?(@url)
             h[:style] = @style if defined?(@style)
             h[:action_id] = @action_id if defined?(@action_id)
+            h[:value] = @value if defined?(@value)
             h[:accessibility_label] = @accessibility_label if defined?(@accessibility_label)
           end
         end
