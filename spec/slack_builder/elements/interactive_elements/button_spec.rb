@@ -22,6 +22,24 @@ RSpec.describe SlackBuilder::Elements::InteractiveElements::Button do
 
     it { is_expected.to eq(expected_attributes) }
 
+    context 'without a url' do
+      let(:element) { described_class.new('Hello', style: :primary) }
+
+      let(:expected_attributes) do
+        {
+          type: 'button',
+          text: {
+            type: 'plain_text',
+            text: 'Hello',
+            emoji: true,
+          },
+          style: 'primary',
+        }
+      end
+
+      it { is_expected.to eq(expected_attributes) }
+    end
+
     context 'with a style' do
       let(:element) { described_class.new('Hello', url: 'https://example.com', style: :primary) }
 
